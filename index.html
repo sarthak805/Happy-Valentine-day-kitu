@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Happy Valentine ❤️</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#ffe6ea,#ffd1dc,#ffc0cb);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
+}
+
+.card{
+background:white;
+width:92%;
+max-width:420px;
+border-radius:25px;
+padding:20px;
+text-align:center;
+box-shadow:0 20px 40px rgba(0,0,0,0.15);
+animation:fade 0.6s;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;}
+}
+
+h1{
+margin:10px 0;
+color:#8b004f;
+}
+
+p{
+font-size:16px;
+line-height:1.5;
+}
+
+img{
+width:200px;
+border-radius:20px;
+margin:10px 0;
+animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-8px);}
+}
+
+button{
+padding:12px 18px;
+border:none;
+border-radius:15px;
+background:#8b004f;
+color:white;
+font-size:16px;
+margin:8px;
+cursor:pointer;
+}
+
+.heart{
+position:fixed;
+font-size:20px;
+animation:float 3s linear;
+}
+
+@keyframes float{
+from{transform:translateY(100vh);opacity:1;}
+to{transform:translateY(-10vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="app"></div>
+
+<script>
+
+const pages=[
+`
+<h1>Babe ❤️</h1>
+<img src="hug.png">
+<p>Happy Valentine's Day 🌹<br>
+Tu meri favourite feeling hai.</p>
+<button onclick="next()">Next ➜</button>
+`,
+
+`
+<h1>Listen 😌</h1>
+<p>Chahe hum fight kare…<br>
+main hamesha pehle aake sorry bolunga ❤️<br>
+because tu meri ho.</p>
+<button onclick="back()">⬅ Back</button>
+<button onclick="next()">Next ➜</button>
+`,
+
+`
+<h1>One Question 💍</h1>
+<p>Will you be my Valentine forever?</p>
+<button onclick="yes()">Yes 😍</button>
+<button onclick="no()">No 😭</button>
+`
+];
+
+let i=0;
+const app=document.getElementById("app");
+
+function render(){
+app.innerHTML=pages[i];
+hearts();
+}
+
+function next(){
+i++;
+render();
+}
+
+function back(){
+i--;
+render();
+}
+
+function yes(){
+app.innerHTML=`
+<h1>YAY 😭❤️</h1>
+<p>Ab tu officially meri hai 💘</p>
+<img src="hug.png">
+<button onclick="restart()">Replay 🔁</button>
+`;
+explode();
+}
+
+function no(){
+app.innerHTML=`
+<h1>No allowed 😤</h1>
+<p>I don't accept No as an answer 😌❤️</p>
+<img src="hug.png">
+<button onclick="render()">Try again 😏</button>
+`;
+}
+
+function restart(){
+i=0;
+render();
+}
+
+function hearts(){
+for(let j=0;j<10;j++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerText=["💗","💖","❤️"][Math.floor(Math.random()*3)];
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),3000);
+}
+}
+
+function explode(){
+for(let k=0;k<30;k++) hearts();
+}
+
+render();
+
+</script>
+
+</body>
+</html>
