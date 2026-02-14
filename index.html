@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Happy Valentine ❤️</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+overflow:hidden;
+background:linear-gradient(135deg,#ffd6e0,#ffc2d1,#ffafcc);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.hearts{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+}
+
+.heart{
+position:absolute;
+color:#ff3b6b;
+animation:float 6s linear infinite;
+font-size:20px;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);opacity:1;}
+100%{transform:translateY(-10vh);opacity:0;}
+}
+
+.card{
+width:92%;
+max-width:420px;
+background:white;
+border-radius:22px;
+padding:20px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+animation:fade 0.6s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.title{
+font-size:28px;
+font-weight:bold;
+color:#c2185b;
+}
+
+.text{
+margin:15px 0;
+font-size:16px;
+}
+
+button{
+padding:12px 18px;
+border:none;
+border-radius:14px;
+font-size:16px;
+font-weight:bold;
+background:#c2185b;
+color:white;
+margin:6px;
+cursor:pointer;
+}
+
+.no{
+background:#333;
+}
+
+.hidden{display:none;}
+</style>
+</head>
+
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="card" id="page1">
+<div class="title">Babe ❤️</div>
+<div class="text">
+Happy Valentine’s Day 🌹<br>
+Tu meri favourite feeling hai.
+</div>
+<button onclick="next(2)">Next ➜</button>
+</div>
+
+<div class="card hidden" id="page2">
+<div class="title">Listen…</div>
+<div class="text">
+Even when we fight,<br>
+I will still come back.<br>
+I will still say sorry.<br>
+Because losing ego is easy,<br>
+losing you is not.
+</div>
+<button onclick="next(3)">Next ➜</button>
+</div>
+
+<div class="card hidden" id="page3">
+<div class="title">Truth ❤️</div>
+<div class="text">
+No matter distance,<br>
+no matter mood,<br>
+no matter situation…<br>
+I choose you. Every time.
+</div>
+<button onclick="next(4)">Next ➜</button>
+</div>
+
+<div class="card hidden" id="page4">
+<div class="title">Question 💍</div>
+<div class="text">
+Will you be mine forever?
+</div>
+<button onclick="yes()">Yes 😍</button>
+<button class="no" onclick="no()">No 😒</button>
+</div>
+
+<div class="card hidden" id="page5">
+<div class="title">YAY ❤️</div>
+<div class="text">
+You’re stuck with me now 😌<br>
+Forever means forever.
+</div>
+<button onclick="restart()">Replay 🔁</button>
+</div>
+
+<div class="card hidden" id="pageNo">
+<div class="title">No allowed 😤</div>
+<div class="text">
+I don’t accept No as an answer 😌❤️
+</div>
+<button onclick="next(4)">Try again 😉</button>
+</div>
+
+<script>
+function next(n){
+document.querySelectorAll('.card').forEach(c=>c.classList.add('hidden'));
+document.getElementById('page'+n).classList.remove('hidden');
+}
+
+function yes(){
+next(5);
+}
+
+function no(){
+document.querySelectorAll('.card').forEach(c=>c.classList.add('hidden'));
+document.getElementById('pageNo').classList.remove('hidden');
+}
+
+function restart(){
+location.reload();
+}
+
+function makeHearts(){
+const h=document.createElement("div");
+h.className="heart";
+h.innerText="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(16+Math.random()*20)+"px";
+document.getElementById("hearts").appendChild(h);
+setTimeout(()=>h.remove(),6000);
+}
+
+setInterval(makeHearts,300);
+</script>
+
+</body>
+</html>
